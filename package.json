@@ -1,0 +1,54 @@
+{
+    "name": "identifierphrase",
+    "displayName": "Identifier to/from Phrase String",
+    "icon": "images/icon.png",
+    "description": "VS Code extention to convert language identifier to/from phrase string.",
+    "version": "1.0.0",
+    "publisher": "sandipchitale",
+    "author": {
+        "name": "Sandip Chitale"
+    },
+    "maintainers": [
+        "Sandip Chitale <sandipchitale@gmail.com>"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sandipchitale/identifierphrase"
+    },
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.identifierToPhrase",
+        "onCommand:extension.phrasToIdentifier"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.identifierToPhrase",
+                "title": "Convert Identifier to Phrase"
+            },
+            {
+                "command": "extension.phrasToIdentifier",
+                "title": "Convert Phrase String to Identifier"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
