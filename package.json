@@ -3,7 +3,7 @@
     "displayName": "Identifier to/from Phrase String",
     "icon": "images/icon.png",
     "description": "VS Code extention to convert language identifier to/from phrase string.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "sandipchitale",
     "author": {
         "name": "Sandip Chitale"
