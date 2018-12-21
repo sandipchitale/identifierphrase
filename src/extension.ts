@@ -27,6 +27,12 @@ function identifierToPhraseString() {
     const editor = vscode.window.activeTextEditor;
     const selections = editor.selections;
 
+    const config = vscode.workspace.getConfiguration(
+        'identifierphrase'
+    );
+
+    console.log(config);
+
     if (selections.length === 1) {
         if (selections.every((selection) => selection.active.isEqual(selection.anchor))) {
             const document = editor.document;
@@ -52,10 +58,14 @@ function identifierToPhraseString() {
             }
 
             if (left !== right) {
-                let phraseString = text.substring(left, right + 1)
-                    .replace(/([A-Z])/g, ' $1')
-                    .replace(/^[a-z]/, fc => fc.toUpperCase())
-                    .replace(/(.+)/g, '\'$1\'');
+                let phraseString = text.substring(left, right + 1);
+                    phraseString = phraseString.replace(/([A-Z])/g, ' $1');
+                    if (config) {
+                        if (config.identifierFirstCharCase === 'uppercase') {
+                            phraseString = phraseString.replace(/^[a-z]/, fc => fc.toUpperCase());
+                        }
+                    }
+                    phraseString = phraseString.replace(/(.+)/g, '\'$1\'');
                 replace(editor, line, left, right, phraseString);
             }
         }
@@ -65,6 +75,12 @@ function identifierToPhraseString() {
 function phraseStringToIdentifier() {
     const editor = vscode.window.activeTextEditor;
     const selections = editor.selections;
+
+    const config = vscode.workspace.getConfiguration(
+        'identifierphrase'
+    );
+
+    console.log(config);
 
     if (selections.length === 1) {
         if (selections.every((selection) => selection.active.isEqual(selection.anchor))) {
@@ -89,12 +105,12 @@ function phraseStringToIdentifier() {
             }
 
             if (left !== -1 && right !== -1) {
-                let identifier = text.substring(left, right + 1)
-                    .replace(/ [a-z]/, spaceFc => spaceFc.toUpperCase())
-                    .replace(/^'/, '')
-                    .replace(/'$/, '')
-                    .replace(/ /g, '')
-                    .replace(/[A-Z]/, spaceFc => spaceFc.toLowerCase());
+                let identifier = text.substring(left, right + 1);
+                    identifier = identifier.replace(/ [a-z]/, spaceFc => spaceFc.toUpperCase())
+                    identifier = identifier.replace(/^'/, '')
+                    identifier = identifier.replace(/'$/, '')
+                    identifier = identifier.replace(/ /g, '')
+                    identifier = identifier.replace(/[A-Z]/, spaceFc => spaceFc.toLowerCase());
                 replace(editor, line, left, right, identifier);
             }
         }
