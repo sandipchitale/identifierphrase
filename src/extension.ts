@@ -31,8 +31,6 @@ function identifierToPhraseString() {
         'identifierphrase'
     );
 
-    console.log(config);
-
     if (selections.length === 1) {
         if (selections.every((selection) => selection.active.isEqual(selection.anchor))) {
             const document = editor.document;
@@ -79,8 +77,6 @@ function phraseStringToIdentifier() {
     const config = vscode.workspace.getConfiguration(
         'identifierphrase'
     );
-
-    console.log(config);
 
     if (selections.length === 1) {
         if (selections.every((selection) => selection.active.isEqual(selection.anchor))) {
